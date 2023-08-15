@@ -1,0 +1,50 @@
+Antes de comenzar, recordemos ciertos conceptos.
+- ¿Qué es una transacción en MySql? Definalo y escriba un ejemplo.
+	corresponde a secuencias de operaciones ejecutadas de forma coherente.
+
+START TRANSACTION;
+	SET autocommit = FALSE;
+    INSERT INTO usuarios_especiales (nombre, apellido, correo_electronico, telefono, genero)
+	SELECT nombre, apellido, correo_electronico, telefono, genero
+	FROM usuarios_inactivos
+	WHERE id IN (3, 4, 5);
+    
+    DELETE FROM usuarios_inactivos
+	WHERE id IN (3, 4, 5);
+
+COMMIT;
+
+- Qué beneficios tiene para la consistencia de los datos, ejecutar transacciones.
+	Permite mantener la integridad y coherencia de los datos de una base de datos.
+
+
+- ¿Qué propiedades tienen las transacciones? Definirlas.
+
+	Las propiedades de las transacciones vienen defiginas por el modelo ACID
+
+	Atomicidad:Garantiza que todas las operaciones dentro de la unidad de trabajo
+se completen con éxito; de lo contrario, la transacción se aborta en el punto de
+falla y las operaciones anteriores se revierten a su estado anterior.
+
+	Consistencia: Garantiza que la base de datos cambie correctamente de estado
+tras una transacción confirmada con éxito.
+
+	Aislamiento: Permite que las transacciones funcionen de forma independiente y
+transparente entre sí.
+
+	Durabilidad: Asegura que el resultado o efecto de una transacción
+comprometida persista en caso de falla del sistema.
+
+- Qué utilidades tienen las sentencias START TRANSACTION, COMMIT y ROLLBACK.
+
+	START TRANSACTION: Se utiliza para dar comienzo a la ejecucion de una transaccion.
+
+	COMMIT: Se utiliza para guardar los
+cambios invocados por una transacción en la base de datos.
+
+	ROLLBACK: Se utiliza para deshacer
+transacciones que aún no se han guardado en la base de datos.
+
+
+- En términos de sintaxis ¿Cuándo finaliza una transacción?
+	La transaccion termina cuando se ejecuta el comando COMMIT O ROLLBACK.
